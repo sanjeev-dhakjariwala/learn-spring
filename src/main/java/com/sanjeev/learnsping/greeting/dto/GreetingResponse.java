@@ -1,4 +1,4 @@
-package com.sanjeev.learnsping.greeting;
+package com.sanjeev.learnsping.greeting.dto;
 
 public class GreetingResponse {
     private String message;

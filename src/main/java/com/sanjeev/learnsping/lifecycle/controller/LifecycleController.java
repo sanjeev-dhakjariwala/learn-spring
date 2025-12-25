@@ -1,4 +1,8 @@
-package com.sanjeev.learnsping.lifecycle;
+package com.sanjeev.learnsping.lifecycle.controller;
+
+import com.sanjeev.learnsping.lifecycle.service.PrototypeService;
+import com.sanjeev.learnsping.lifecycle.service.PrototypeTrackerService;
+import com.sanjeev.learnsping.lifecycle.service.SingletonService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

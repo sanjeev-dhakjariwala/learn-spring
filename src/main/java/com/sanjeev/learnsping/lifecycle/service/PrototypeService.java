@@ -1,4 +1,4 @@
-package com.sanjeev.learnsping.lifecycle;
+package com.sanjeev.learnsping.lifecycle.service;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;

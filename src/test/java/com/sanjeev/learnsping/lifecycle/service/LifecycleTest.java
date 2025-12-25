@@ -1,4 +1,6 @@
-package com.sanjeev.learnsping.lifecycle;
+package com.sanjeev.learnsping.lifecycle.service;
+
+import com.sanjeev.learnsping.lifecycle.controller.LifecycleController;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

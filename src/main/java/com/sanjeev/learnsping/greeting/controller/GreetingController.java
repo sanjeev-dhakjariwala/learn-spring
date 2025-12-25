@@ -1,4 +1,7 @@
-package com.sanjeev.learnsping.greeting;
+package com.sanjeev.learnsping.greeting.controller;
+
+import com.sanjeev.learnsping.greeting.dto.GreetingResponse;
+import com.sanjeev.learnsping.greeting.service.GreetingService;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;

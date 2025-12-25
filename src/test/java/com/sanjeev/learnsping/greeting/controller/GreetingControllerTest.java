@@ -1,4 +1,9 @@
-package com.sanjeev.learnsping.greeting;
+package com.sanjeev.learnsping.greeting.controller;
+
+import com.sanjeev.learnsping.greeting.dto.GreetingResponse;
+import com.sanjeev.learnsping.greeting.service.FormalGreetingService;
+import com.sanjeev.learnsping.greeting.service.FriendlyGreetingService;
+import com.sanjeev.learnsping.greeting.service.GreetingService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
