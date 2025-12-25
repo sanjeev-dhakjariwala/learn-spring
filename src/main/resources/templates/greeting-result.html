@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting Result - Spring Boot Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .result-box {
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 6px solid #667eea;
+        }
+        .greeting-type {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .greeting-message {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .greeting-info {
+            font-size: 16px;
+            color: #777;
+            margin-top: 15px;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        button, a.button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .btn-back {
+            background: #667eea;
+            color: white;
+        }
+        .btn-back:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .btn-try-again {
+            background: #28a745;
+            color: white;
+        }
+        .btn-try-again:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+        }
+        .technical-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+        .technical-info h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+        .technical-info p {
+            color: #856404;
+            margin: 8px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #667eea;
+            color: white;
+            border-radius: 12px;
+            font-size: 14px;
+            margin: 0 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Greeting Result</h1>
+
+        <div class="result-box">
+            <div class="greeting-type" th:text="${type} + ' Greeting'">Greeting Type</div>
+            <div class="greeting-message" th:text="${message}">Greeting Message</div>
+            <div class="greeting-info">
+                Greeted: <strong th:text="${name}">Name</strong>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="/greetings" class="button btn-back">← Back to Home</a>
+            <button class="btn-try-again" onclick="history.back()">Try Another Name</button>
+        </div>
+
+        <div class="technical-info">
+            <h3>🔧 Spring Concepts in Action</h3>
+            <p>
+                <span class="badge">@Controller</span>
+                <span class="badge">Model</span>
+                <span class="badge">Thymeleaf</span>
+                <span class="badge">DI</span>
+            </p>
+            <p><strong>Controller Method:</strong> <code th:text="'/greetings/' + ${type.toLowerCase()}">endpoint</code></p>
+            <p><strong>Service Used:</strong> <span th:if="${type == 'Friendly'}">FriendlyGreetingService (@Primary)</span>
+                <span th:if="${type == 'Formal'}">FormalGreetingService (@Qualifier)</span>
+            </p>
+            <p><strong>View:</strong> greeting-result.html (Thymeleaf Template)</p>
+            <p><strong>Data Binding:</strong> Model attributes passed from controller to view</p>
+        </div>
+    </div>
+</body>
+</html>
+

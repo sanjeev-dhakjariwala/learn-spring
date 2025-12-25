@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting Service - Spring Boot Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .greeting-form {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        button {
+            flex: 1;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-friendly {
+            background: #28a745;
+            color: white;
+        }
+        .btn-friendly:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+        }
+        .btn-formal {
+            background: #007bff;
+            color: white;
+        }
+        .btn-formal:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+        }
+        .info-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e7f3ff;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+        }
+        .info-box h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .info-box ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .info-box li {
+            margin: 8px 0;
+            color: #555;
+        }
+        .api-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        .api-link:hover {
+            background: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 Spring Boot Greeting Service 🌟</h1>
+
+        <div class="greeting-form">
+            <form id="greetingForm">
+                <div class="form-group">
+                    <label for="name">Enter your name:</label>
+                    <input type="text" id="name" name="name" placeholder="World" value="World">
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-friendly" onclick="submitGreeting('friendly')">
+                        😊 Friendly Greeting
+                    </button>
+                    <button type="button" class="btn-formal" onclick="submitGreeting('formal')">
+                        🎩 Formal Greeting
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="info-box">
+            <h3>📚 Spring MVC Demonstration</h3>
+            <p><strong>This page demonstrates:</strong></p>
+            <ul>
+                <li><strong>@Controller:</strong> Server-side rendering with Thymeleaf</li>
+                <li><strong>Model:</strong> Passing data from controller to view</li>
+                <li><strong>Thymeleaf Templates:</strong> Dynamic HTML generation</li>
+                <li><strong>Dependency Injection:</strong> Constructor injection of services</li>
+                <li><strong>@Qualifier:</strong> Selecting specific bean implementations</li>
+            </ul>
+            <p><strong>REST API endpoints are also available:</strong></p>
+            <ul>
+                <li>GET <code>/api/greetings?name=YourName</code></li>
+                <li>GET <code>/api/greetings/formal?name=YourName</code></li>
+            </ul>
+            <a href="/api/greetings?name=SpringDev" class="api-link" target="_blank">
+                Try REST API →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function submitGreeting(type) {
+            const name = document.getElementById('name').value || 'World';
+            window.location.href = `/greetings/${type}?name=${encodeURIComponent(name)}`;
+        }
+    </script>
+</body>
+</html>
+
