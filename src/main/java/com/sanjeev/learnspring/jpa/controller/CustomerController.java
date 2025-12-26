@@ -7,6 +7,7 @@ import com.sanjeev.learnspring.jpa.entity.Customer;
 import com.sanjeev.learnspring.jpa.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -37,6 +38,7 @@ public class CustomerController {
      * Returns: 200 OK with list of customers
      */
     @GetMapping
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<List<CustomerResponseDTO>> getAllCustomers() {
         List<CustomerResponseDTO> customers = customerService.getAllCustomers();
         return ResponseEntity.ok(customers);
@@ -47,6 +49,7 @@ public class CustomerController {
      * Returns: 200 OK if found, 404 Not Found if not exists
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<CustomerResponseDTO> getCustomerById(@PathVariable Long id) {
         CustomerResponseDTO customer = customerService.getCustomerById(id);
         return ResponseEntity.ok(customer);
@@ -57,6 +60,7 @@ public class CustomerController {
      * Returns: 200 OK if found, 404 Not Found if not exists
      */
     @GetMapping("/email/{email}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CustomerResponseDTO> getCustomerByEmail(@PathVariable String email) {
         CustomerResponseDTO customer = customerService.getCustomerByEmail(email);
         return ResponseEntity.ok(customer);
@@ -67,6 +71,7 @@ public class CustomerController {
      * Returns: 200 OK with list of matching customers
      */
     @GetMapping("/search")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CustomerResponseDTO>> searchCustomers(
             @RequestParam String term) {
         List<CustomerResponseDTO> customers = customerService.searchCustomers(term);
@@ -78,6 +83,7 @@ public class CustomerController {
      * Returns: 200 OK with list of customers
      */
     @GetMapping("/city/{city}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CustomerResponseDTO>> getCustomersByCity(@PathVariable String city) {
         List<CustomerResponseDTO> customers = customerService.getCustomersByCity(city);
         return ResponseEntity.ok(customers);
@@ -88,6 +94,7 @@ public class CustomerController {
      * Returns: 200 OK with list of customers
      */
     @GetMapping("/status/{status}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CustomerResponseDTO>> getCustomersByStatus(
             @PathVariable Customer.CustomerStatus status) {
         List<CustomerResponseDTO> customers = customerService.getCustomersByStatus(status);
@@ -99,6 +106,7 @@ public class CustomerController {
      * Returns: 200 OK with list of customers
      */
     @GetMapping("/born-after")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CustomerResponseDTO>> getCustomersBornAfter(
             @RequestParam String date) {
         LocalDate localDate = LocalDate.parse(date);
@@ -112,6 +120,7 @@ public class CustomerController {
      * Validates: All required fields using @Valid
      */
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CustomerResponseDTO> createCustomer(
             @Valid @RequestBody CustomerRequestDTO requestDTO) {
         CustomerResponseDTO created = customerService.createCustomer(requestDTO);
@@ -130,6 +139,7 @@ public class CustomerController {
      * Validates: Fields using @Valid
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CustomerResponseDTO> updateCustomer(
             @PathVariable Long id,
             @Valid @RequestBody CustomerUpdateDTO updateDTO) {
@@ -142,6 +152,7 @@ public class CustomerController {
      * Returns: 204 No Content if successful, 404 Not Found if not exists
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
@@ -152,6 +163,7 @@ public class CustomerController {
      * Returns: 200 OK with updated customer
      */
     @PatchMapping("/{id}/activate")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CustomerResponseDTO> activateCustomer(@PathVariable Long id) {
         CustomerResponseDTO activated = customerService.activateCustomer(id);
         return ResponseEntity.ok(activated);
@@ -162,6 +174,7 @@ public class CustomerController {
      * Returns: 200 OK with updated customer
      */
     @PatchMapping("/{id}/suspend")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CustomerResponseDTO> suspendCustomer(@PathVariable Long id) {
         CustomerResponseDTO suspended = customerService.suspendCustomer(id);
         return ResponseEntity.ok(suspended);
@@ -172,6 +185,7 @@ public class CustomerController {
      * Returns: 200 OK with updated customer
      */
     @PatchMapping("/{id}/deactivate")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CustomerResponseDTO> deactivateCustomer(@PathVariable Long id) {
         CustomerResponseDTO deactivated = customerService.deactivateCustomer(id);
         return ResponseEntity.ok(deactivated);
@@ -182,6 +196,7 @@ public class CustomerController {
      * Returns: 200 OK with count
      */
     @GetMapping("/stats/count")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Long> getCustomerCount() {
         long count = customerService.getCustomerCount();
         return ResponseEntity.ok(count);
@@ -192,6 +207,7 @@ public class CustomerController {
      * Returns: 200 OK with count
      */
     @GetMapping("/stats/active-count")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Long> getActiveCustomerCount() {
         long count = customerService.getActiveCustomerCount();
         return ResponseEntity.ok(count);
